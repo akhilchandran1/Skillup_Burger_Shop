@@ -3,6 +3,9 @@
 .about {
   width: 100%;
   background-color: $pink;
+  background-image: url("../assets/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 
   > main {
     background-color: white;
@@ -12,10 +15,10 @@
 
     > h1 {
       font: 500 3rem "Roboto";
-      color: $red;
+      color: #ffff;
       padding: 1rem 2rem;
       text-transform: uppercase;
-      background-color: $dark;
+      background-color: $red;
     }
 
     > article {
@@ -56,7 +59,7 @@
     }
 
     > div {
-      background-color: $dark;
+      background-color: $red;
       padding: 2rem;
       color: white;
       > h2 {

@@ -3,6 +3,9 @@
 .orderDetails {
   background-color: $pink;
   width: 100%;
+  background-image: url("../assets/bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 
   > main {
     background-color: white;

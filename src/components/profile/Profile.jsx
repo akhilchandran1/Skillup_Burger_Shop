@@ -1,8 +1,8 @@
 import React from "react";
 import { motion } from "framer-motion";
-import me from "../../assets/skj.jpg";
+import { founterInfo } from "../home/Founder";
 import { Link } from "react-router-dom";
-import { MdDashboard } from "react-icons/md";
+// import { MdDashboard } from "react-icons/md";
 
 const Profile = () => {
   const options = {
@@ -18,11 +18,11 @@ const Profile = () => {
   return (
     <section className="profile">
       <main>
-        <motion.img src={me} alt="User" {...options} />
+        <motion.img src={founterInfo.image} alt="User" {...options} />
         <motion.h5 {...options} transition={{ delay: 0.3 }}>
-          Nelson
+          {founterInfo.name}
         </motion.h5>
-      
+
         <motion.div
           initial={{
             x: "-100vw",
