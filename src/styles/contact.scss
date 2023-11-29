@@ -38,6 +38,10 @@
       border-radius: 5px;
     }
 
+    > input:focus, textarea:focus {
+      border: 1px solid rgba(123, 10, 87, 0.769);
+    }
+
     > button {
       background-color: $red;
       border: none;

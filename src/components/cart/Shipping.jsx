@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Country, State } from "country-state-city";
 import Popup from "reactjs-popup";
 import { Link } from "react-router-dom";
 
 const Shipping = () => {
+  const [selectedCountry, setSelectedCountry] = useState("IN");
+  const [selectedState, setSelectedState] = useState("");
+
+  const handleCountrySelection = (event) => {
+    setSelectedCountry(event.target.value);
+    setSelectedState("");
+  };
+
   return (
     <section className="shipping">
       <main>
@@ -21,13 +29,13 @@ const Shipping = () => {
             {/* Compelte the code for the COUNTRY DROPDOWN*/}
             <label>Country</label>
 
-            <select>
-              <option value="">Country</option>
+            <select value={selectedCountry} onChange={handleCountrySelection}>
+              {/* <option >Country</option> */}
               {/*  Enter the code here for country dropdown            */}
               {Country &&
-                Country.getAllCountries().map((i) => (
-                  <option value={i.isoCode} key={i.isoCode}>
-                    {i.name}
+                Country.getAllCountries().map((country) => (
+                  <option value={country.isoCode} key={country.isoCode}>
+                    {country.name}
                   </option>
                 ))}
             </select>
@@ -35,12 +43,17 @@ const Shipping = () => {
           <div>
             {/* Add the code for the STATE DROPDOWN*/}
             <label>State</label>
-            <select>
-              <option value="">State</option>
+            <select
+              value={selectedState}
+              onChange={(event) => setSelectedState(event.target.value)}
+            >
+              <option value="" disabled selected>
+                Select your State
+              </option>
               {State &&
-                State.getStatesOfCountry("IN").map((i) => (
-                  <option option value={i.isoCode} key={i.isoCode}>
-                    {i.name}
+                State.getStatesOfCountry(selectedCountry).map((state) => (
+                  <option option value={state.isoCode} key={state.isoCode}>
+                    {state.name}
                   </option>
                 ))}
             </select>
