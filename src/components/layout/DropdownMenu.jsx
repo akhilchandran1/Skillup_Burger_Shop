@@ -14,26 +14,34 @@ function DropdownMenu() {
     setNavLinks(navs);
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("activeUserInfo");
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark">
         <div className="container">
           {/* <a className="navbar-brand" href="#"></a> */}
-          <div class="btn-group">
+          <div className="btn-group">
             <button
               type="button"
-              class="btn btn-primary dropdown-toggle"
+              className="btn btn-primary dropdown-toggle"
               data-bs-toggle="dropdown"
               data-bs-display="static"
               aria-expanded="false"
             >
               Menu
             </button>
-            <ul class="dropdown-menu dropdown-menu-end">
+            <ul className="dropdown-menu dropdown-menu-end">
               {navLinks.map((d, i) => (
                 <li key={i}>
                   <Link to={d.path}>
-                    <button class="dropdown-item" type="button">
+                    <button
+                      className="dropdown-item"
+                      type="button"
+                      onClick={handleLogout}
+                    >
                       {d.name}
                     </button>
                   </Link>

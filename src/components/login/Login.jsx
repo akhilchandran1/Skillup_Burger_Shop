@@ -12,9 +12,34 @@ import {
   MDBInput,
   MDBCheckbox,
 } from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
+
+const Users = [
+  {
+    email: "akhil@gmail.com",
+    password: "akhil123",
+    name: "AKhil Chandran",
+    username: "akhil",
+  },
+  {
+    email: "manu@gmail.com",
+    password: "manu123",
+    name: "Manu Pilli",
+    username: "manu",
+  },
+];
 
 function Login() {
   const [justifyActive, setJustifyActive] = useState("tab1");
+  const [users, setUsers] = useState(Users);
+  const [loginDetails, setLoginDetails] = useState({ email: "", password: "" });
+  const [registerFormData, setRegisterFormData] = useState({
+    email: "",
+    password: "",
+    name: "",
+    username: "",
+  });
+  const navigate = useNavigate();
 
   const handleJustifyClick = (value) => {
     if (value === justifyActive) {
@@ -22,6 +47,47 @@ function Login() {
     }
     setJustifyActive(value);
   };
+
+  function handleLogin() {
+    const validUser = users.find((user) => {
+      return (
+        user.email === loginDetails.email &&
+        user.password === loginDetails.password
+      );
+    });
+
+    if (validUser) {
+      localStorage.setItem("activeUserInfo", JSON.stringify(validUser));
+      navigate("/");
+    } else {
+      alert("Invalid email or password! Please check your entries.");
+    }
+  }
+
+  function handleRegister() {
+    console.log("register button clicked");
+    if (
+      registerFormData.email.length === 0 ||
+      registerFormData.password.length === 0 ||
+      registerFormData.name.length === 0 ||
+      registerFormData.username.length === 0
+    ) {
+      alert("Please complete the fields");
+      return;
+    }
+    const existingAccount = users.find((user) => {
+      return user.email === registerFormData.email;
+    });
+
+    if (existingAccount) {
+      alert("Already have an account in this email ID. Please login");
+      handleJustifyClick("tab1");
+    } else {
+      setUsers((oldUsers) => [...oldUsers, registerFormData]);
+      alert("Successfully created account. Please login");
+      handleJustifyClick("tab1");
+    }
+  }
 
   return (
     <MDBContainer className="p-3 my-5 d-flex flex-column w-50">
@@ -90,17 +156,24 @@ function Login() {
             </div>
             <p className="text-center mt-3">or:</p>
           </div>
+
           <MDBInput
             wrapperClass="mb-4"
             label="Email address"
             id="form1"
             type="email"
+            onChange={(e) =>
+              setLoginDetails({ ...loginDetails, email: e.target.value })
+            }
           />
           <MDBInput
             wrapperClass="mb-4"
             label="Password"
             id="form2"
             type="password"
+            onChange={(e) =>
+              setLoginDetails({ ...loginDetails, password: e.target.value })
+            }
           />
           <div className="d-flex justify-content-between mx-4 mb-4">
             <MDBCheckbox
@@ -111,7 +184,9 @@ function Login() {
             />
             <a href="!#">Forgot password?</a>
           </div>
-          <MDBBtn className="mb-4 w-100">Sign in</MDBBtn>
+          <MDBBtn className="mb-4 w-100" type="button" onClick={handleLogin}>
+            Sign in
+          </MDBBtn>
           <p className="text-center">
             Not a member? <a href="#!">Register</a>
           </p>
@@ -158,19 +233,53 @@ function Login() {
             </div>
             <p className="text-center mt-3">or:</p>
           </div>
-          <MDBInput wrapperClass="mb-4" label="Name" id="form1" type="text" />
+          <MDBInput
+            wrapperClass="mb-4"
+            label="Name"
+            id="form1"
+            type="text"
+            onChange={(e) =>
+              setRegisterFormData({
+                ...registerFormData,
+                name: e.target.value,
+              })
+            }
+          />
           <MDBInput
             wrapperClass="mb-4"
             label="Username"
             id="form1"
             type="text"
+            onChange={(e) =>
+              setRegisterFormData({
+                ...registerFormData,
+                username: e.target.value,
+              })
+            }
           />
-          <MDBInput wrapperClass="mb-4" label="Email" id="form1" type="email" />
+          <MDBInput
+            wrapperClass="mb-4"
+            label="Email"
+            id="form1"
+            type="email"
+            onChange={(e) =>
+              setRegisterFormData({
+                ...registerFormData,
+                email: e.target.value,
+              })
+            }
+          />
           <MDBInput
             wrapperClass="mb-4"
             label="Password"
             id="form1"
             type="password"
+            onChange={(e) =>
+              setRegisterFormData({
+                ...registerFormData,
+                password: e.target.value,
+              })
+            }
           />
           <div className="d-flex justify-content-center mb-4">
             <MDBCheckbox
@@ -179,7 +288,9 @@ function Login() {
               label="I have read and agree to the terms"
             />
           </div>
-          <MDBBtn className="mb-4 w-100">Sign up</MDBBtn>
+          <MDBBtn className="mb-4 w-100" type="button" onClick={handleRegister}>
+            Sign up
+          </MDBBtn>
         </MDBTabsPane>
       </MDBTabsContent>
     </MDBContainer>
