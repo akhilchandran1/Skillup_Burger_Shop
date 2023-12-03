@@ -34,7 +34,21 @@
     }
   }
 }
-
+.empty-cart-card {
+  position: sticky;
+  left: 40%;
+  top: 30%;
+  height: 100px;
+  width: 400px;
+  background: #f2f2f2;
+  overflow: scroll;
+  border-radius: 11px;
+  box-shadow: 0 0 20px 8px #ff7e946e;
+  text-align: center;
+  >p{
+    padding: 1rem;
+  }
+}
 .cartItem {
   background-color: rgb(246, 246, 246);
   margin: 1rem;

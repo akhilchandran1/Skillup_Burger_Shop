@@ -30,7 +30,9 @@ const Shipping = () => {
             <label>Country</label>
 
             <select value={selectedCountry} onChange={handleCountrySelection}>
-              {/* <option >Country</option> */}
+              {/* <option value="" disabled>
+                Select your Country
+              </option> */}
               {/*  Enter the code here for country dropdown            */}
               {Country &&
                 Country.getAllCountries().map((country) => (
@@ -47,9 +49,7 @@ const Shipping = () => {
               value={selectedState}
               onChange={(event) => setSelectedState(event.target.value)}
             >
-              <option value="" disabled selected>
-                Select your State
-              </option>
+              <option value="">Select your State</option>
               {State &&
                 State.getStatesOfCountry(selectedCountry).map((state) => (
                   <option option value={state.isoCode} key={state.isoCode}>

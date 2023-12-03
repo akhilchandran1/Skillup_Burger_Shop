@@ -5,29 +5,13 @@ import { Link } from "react-router-dom";
 import { FiShoppingCart, FiLogIn } from "react-icons/fi";
 // import { FaUser } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 import DropdownMenu from "./DropdownMenu";
-// import getCartItems from "../hooks/cartItems";
-
-// const GetCartItems =()=>{
-//   const [totalCartItems, setTotalCartItems] = useState(0);
-
-//   useEffect(() => {
-//     setTotalCartItems(Object.keys(getCartItems).length);
-//   }, [getCartItems]);
-// }
-// import { CartTotalItems } from "../home/Menu";
-
-// const cartCount = (count = 0) => {
-//   return count > 0 && <span className="cart-item-count">{count}</span>;
-// };
-
-const CartTotalItems = () => {
-  const [cartSize, setCartSize] = React.useState(0);
-  return { cartSize, setCartSize };
-};
 
 const Header = ({ isAuthenticated = false }) => {
-  const { cartSize } = CartTotalItems();
+  const cartItems = useSelector((state) => state.cart.cartItems);
+  console.log(useSelector((state) => state.cart));
+  const totalCartItems = cartItems.length;
   return (
     <nav>
       <motion.div initial={{ x: "-100%" }} whileInView={{ x: 0 }}>
@@ -39,7 +23,11 @@ const Header = ({ isAuthenticated = false }) => {
         <Link to="/about">About</Link>
         <Link to="/cart">
           {/* <span id="cartTotalItems" className="cart-item-count"></span> */}
-          <span id="cartTotalItems"></span>
+          {totalCartItems > 0 && (
+            <span id="cartTotalItems" className="cart-item-count">
+              {totalCartItems}
+            </span>
+          )}
 
           <FiShoppingCart />
         </Link>
@@ -49,4 +37,3 @@ const Header = ({ isAuthenticated = false }) => {
   );
 };
 export default Header;
-export { CartTotalItems };
