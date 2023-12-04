@@ -10,8 +10,7 @@ import DropdownMenu from "./DropdownMenu";
 
 const Header = ({ isAuthenticated = false }) => {
   const cartItems = useSelector((state) => state.cart.cartItems);
-  console.log(useSelector((state) => state.cart));
-  const totalCartItems = cartItems.length;
+  const totalCartItems = cartItems ? cartItems.length : 0;
   return (
     <nav>
       <motion.div initial={{ x: "-100%" }} whileInView={{ x: 0 }}>

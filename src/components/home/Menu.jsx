@@ -1,5 +1,5 @@
 // Write all the code here
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import MenuCard from "./MenuCard";
 import burger1 from "../../assets/burger1.png";
@@ -9,27 +9,7 @@ import { addToCart } from "../../redux/cartSlice";
 
 const Menu = () => {
   const dispatch = useDispatch();
-  // const [cartItems, setCartItems] = useState([]);
-  // const addToCartHandler = (itemNum, burgerSrc, price, title) => {
-  //   if (cartItems && cartItems.some((cartItem) => cartItem.id === itemNum)) {
-  //     setCartItems((cartItems) =>
-  //       cartItems.map((cartItem) =>
-  //         cartItem.id === itemNum
-  //           ? { ...cartItem, value: cartItem.value + 1 }
-  //           : cartItem
-  //       )
-  //     );
-  //   } else {
-  //     const newItem = {
-  //       id: itemNum,
-  //       title: title,
-  //       img: burgerSrc,
-  //       price: price,
-  //       value: 1,
-  //     };
-  //     setCartItems((currentItems) => [...currentItems, newItem]);
-  //   }
-  // };
+
   const addToCartHandler = (itemNum, burgerSrc, price, title) => {
     const newItem = {
       id: itemNum,
@@ -39,16 +19,6 @@ const Menu = () => {
     };
     dispatch(addToCart(newItem));
   };
-
-  // useEffect(() => {
-  //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  //   const totalItems = Object.keys(cartItems).length;
-  //   const cartCount = document.getElementById("cartTotalItems");
-  //   if (totalItems > 0) {
-  //     cartCount.innerHTML = totalItems;
-  //     cartCount.classList.add("cart-item-count");
-  //   }
-  // }, [cartItems]);
 
   return (
     <section id="menu">

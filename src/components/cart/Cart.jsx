@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart } from "../../redux/cartSlice";
-import getCartItems from "../hooks/cartItems";
 
 const CartItem = ({ id, value, title, img, increment, decrement }) => (
   <div className="cartItem">
@@ -22,24 +21,12 @@ const CartItem = ({ id, value, title, img, increment, decrement }) => (
 const Cart = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
-  // console.log(cartItems);
-  // const [cartItems, setCartItems] = useState(getCartItems);
 
   const increment = (itemId) => {
-    // const updatedCartItems = cartItems.map((item) =>
-    //   item.id === itemId ? { ...item, value: item.value + 1 } : item
-    // );
-    // setCartItems(updatedCartItems);
     dispatch(addToCart({ id: itemId }));
   };
 
   const decrement = (itemId) => {
-    // const updatedCartItems = cartItems.map((item) =>
-    //   item.id === itemId && item.value > 0
-    //     ? { ...item, value: item.value - 1 }
-    //     : item
-    // );
-    // setCartItems(updatedCartItems);
     dispatch(removeFromCart({ id: itemId }));
   };
 
@@ -53,10 +40,6 @@ const Cart = () => {
   const shippingCharge = 200;
   const totalAmount = () =>
     calculateSubtotalAmount() + calculateTax() + shippingCharge;
-
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
 
   return (
     <section className="cart">
