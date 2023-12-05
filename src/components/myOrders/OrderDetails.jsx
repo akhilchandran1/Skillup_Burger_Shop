@@ -1,7 +1,20 @@
 // Write all the code here
 
 import React from "react";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const OrderDetails = () => {
+  const { id } = useParams();
+  const orders = useSelector((state) => state.orders.orders);
+  const getDate = (date) => {
+    return new Date(date).toLocaleDateString();
+  };
+
+  const order = orders.find((order) => order.id === id);
+  if (!order) return <p>No Orders Places yet</p>;
+  console.log(order);
+
   return (
     <section className="orderDetails">
       <main>
@@ -10,7 +23,7 @@ const OrderDetails = () => {
           <h1>Shipping</h1>
           <p>
             <b>Address</b>
-            {"sjda 12-32ss dsad"}
+            {order.shippingData.houseNo}
           </p>
         </div>
         <div>
@@ -20,7 +33,7 @@ const OrderDetails = () => {
             {"Stuart"}
           </p>
           <p>
-            <b>Phone</b> {2131232123}
+            <b>Phone</b> {order.shippingData.phoneNo}
           </p>
         </div>
         <div>
@@ -30,11 +43,11 @@ const OrderDetails = () => {
             {"Processing"}
           </p>
           <p>
-            <b>Placed At</b> {"23-02-2002"}
+            <b>Placed At</b> {getDate(order.date)}
           </p>
           <p>
             <b>Delivered At</b>
-            {"23-02-2003"}
+            {getDate(order.date)}
           </p>
         </div>
         <div>
@@ -46,27 +59,35 @@ const OrderDetails = () => {
             <b>Payment Reference</b>#{"asdasdsadsad"}
           </p>
           <p>
-            <b>Paid At</b> {"23-02-2003"}
+            <b>Paid At</b> {getDate(order.date)}
           </p>
         </div>
         <div>
           <h1>Amount</h1>
           <p>
-            <b>Items Total</b>₹{2132}
+            <b>Items Total / Subtotal</b>₹{order.subtotalAmount}
           </p>
           <p>
-            <b>Shipping Charges</b>₹{200}
+            <b>Shipping Charges</b>₹{order.shippingCharge}
           </p>
           <p>
-            <b>Tax</b>₹{232}
+            <b>Tax</b>₹{order.tax}
           </p>
           <p>
-            <b>Total Amount</b>₹{232 + 200 + 2132}
+            <b>Total Amount</b>₹{order.totalAmount}
           </p>
         </div>
         <article>
           <h1>Ordered Items</h1>
-          <div>
+          {order.orderItems.map((item, index) => (
+            <div key={index}>
+              <h4>{item.title}</h4>
+              <div>
+                <span>{item.value}</span> x <span>{item.price}</span>
+              </div>
+            </div>
+          ))}
+          {/* <div>
             <h4>Cheese Burger</h4>
             <div>
               <span>{12}</span> x <span>{232}</span>
@@ -83,7 +104,7 @@ const OrderDetails = () => {
             <div>
               <span>{10}</span> x <span>{1800}</span>
             </div>
-          </div>
+          </div> */}
           <div>
             <h4 style={{ fontWeight: 800 }}>Sub Total </h4>
             <div
@@ -91,7 +112,7 @@ const OrderDetails = () => {
                 fontWeight: 800,
               }}
             >
-              ₹{2132}
+              ₹{order.subtotalAmount}
             </div>
           </div>
         </article>

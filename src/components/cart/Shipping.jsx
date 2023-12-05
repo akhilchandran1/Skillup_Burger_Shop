@@ -39,15 +39,6 @@ const Shipping = () => {
     setSelectedState(event.target.value);
     handleUserInput(event);
   };
-  // const handleEmptyValue = () => {
-  //   const validateUserInput = Object.values(shippingData).every(
-  //     (field) => field.length !== 0
-  //   );
-  //   if (!validateUserInput) {
-  //     setShowErrorMessage(true);
-  //     return;
-  //   }
-  // };
 
   const handleFormSubmission = (event) => {
     event.preventDefault();
@@ -74,10 +65,11 @@ const Shipping = () => {
 
     const newOrder = {
       id: uuidv4(),
-      cartItems: cartItems,
+      orderItems: cartItems,
       shippingData: shippingData,
       date: new Date().toISOString(),
       totalQuantity: totalQuantity(),
+      subtotalAmount: calculateSubtotalAmount,
       tax: calculateTax,
       shippingCharge: shippingCharge,
       totalAmount: totalAmount,

@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 const MyOrders = () => {
   const orders = useSelector((state) => state.orders.orders);
-  // const arr = [1, 2, 3, 4];
 
   return (
     <section className="tableClass">
@@ -32,7 +31,7 @@ const MyOrders = () => {
                 <td>₹{order.totalAmount}</td>
                 <td>COD</td>
                 <td>
-                  <Link to={`/order/${index}`}>
+                  <Link to={`/order/${order.id}`}>
                     <AiOutlineEye />
                   </Link>
                 </td>
