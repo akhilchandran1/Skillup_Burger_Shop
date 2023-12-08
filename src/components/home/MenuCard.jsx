@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 
 const MenuCard = ({ itemNum, burgerSrc, price, title, handler, delay = 0 }) => {
   const [addToCartClick, setAddToCartClick] = useState(false);
+
   const addToCartHandler = async () => {
     await handler(itemNum, burgerSrc, price, title);
     setAddToCartClick(true);
     setTimeout(() => setAddToCartClick(false), 1000);
   };
+
   return (
     <motion.div
       className="menuCard"

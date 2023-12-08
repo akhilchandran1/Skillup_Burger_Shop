@@ -16,16 +16,10 @@ import { useNavigate } from "react-router-dom";
 
 const Users = [
   {
-    email: "akhil@gmail.com",
-    password: "akhil123",
-    name: "AKhil Chandran",
-    username: "akhil",
-  },
-  {
-    email: "manu@gmail.com",
-    password: "manu123",
-    name: "Manu Pilli",
-    username: "manu",
+    email: "meera@gmail.com",
+    password: "meera123",
+    name: "Meera Dev",
+    username: "meera",
   },
 ];
 
@@ -131,6 +125,7 @@ function Login() {
                 color="none"
                 className="m-1"
                 style={{ color: "#1266f1" }}
+                onClick={() => navigate("/")}
               >
                 <MDBIcon fab icon="facebook-f" size="sm" />
               </MDBBtn>
@@ -139,6 +134,7 @@ function Login() {
                 color="none"
                 className="m-1"
                 style={{ color: "#1266f1" }}
+                onClick={() => navigate("/")}
               >
                 <MDBIcon fab icon="twitter" size="sm" />
               </MDBBtn>
@@ -147,6 +143,7 @@ function Login() {
                 color="none"
                 className="m-1"
                 style={{ color: "#1266f1" }}
+                onClick={() => navigate("/")}
               >
                 <MDBIcon fab icon="google" size="sm" />
               </MDBBtn>
@@ -155,6 +152,7 @@ function Login() {
                 color="none"
                 className="m-1"
                 style={{ color: "#1266f1" }}
+                onClick={() => navigate("/")}
               >
                 <MDBIcon fab icon="github" size="sm" />
               </MDBBtn>
@@ -208,6 +206,7 @@ function Login() {
                 color="none"
                 className="m-1"
                 style={{ color: "#1266f1" }}
+                onClick={() => navigate("/")}
               >
                 <MDBIcon fab icon="facebook-f" size="sm" />
               </MDBBtn>
@@ -216,6 +215,7 @@ function Login() {
                 color="none"
                 className="m-1"
                 style={{ color: "#1266f1" }}
+                onClick={() => navigate("/")}
               >
                 <MDBIcon fab icon="twitter" size="sm" />
               </MDBBtn>
@@ -224,6 +224,7 @@ function Login() {
                 color="none"
                 className="m-1"
                 style={{ color: "#1266f1" }}
+                onClick={() => navigate("/")}
               >
                 <MDBIcon fab icon="google" size="sm" />
               </MDBBtn>
@@ -232,6 +233,7 @@ function Login() {
                 color="none"
                 className="m-1"
                 style={{ color: "#1266f1" }}
+                onClick={() => navigate("/")}
               >
                 <MDBIcon fab icon="github" size="sm" />
               </MDBBtn>

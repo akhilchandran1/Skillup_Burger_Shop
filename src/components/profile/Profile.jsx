@@ -1,10 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { founterInfo } from "../home/Founder";
 import { Link } from "react-router-dom";
 // import { MdDashboard } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import profileIcon from "../../assets/profile-icon.png";
+import profilePicMeera from "../../assets/meeraProPic.png";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -24,12 +24,15 @@ const Profile = () => {
     <section className="profile">
       <main>
         <motion.img
-          src={activeUser ? profileIcon : founterInfo.image}
+          src={
+            activeUser &&
+            (activeUser.username === "meera" ? profilePicMeera : profileIcon)
+          }
           alt="User"
           {...options}
         />
         <motion.h5 {...options} transition={{ delay: 0.3 }}>
-          {activeUser ? activeUser.name : founterInfo.name}
+          {activeUser ? activeUser.name : "Gust User"}
         </motion.h5>
 
         <motion.div

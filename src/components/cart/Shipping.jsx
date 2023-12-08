@@ -90,7 +90,6 @@ const Shipping = () => {
       {cartItems ? (
         <main>
           <h1>Shipping Details</h1>
-          {console.log(cartItems)}
           <form>
             <div>
               <label>H.No.</label>
@@ -124,7 +123,7 @@ const Shipping = () => {
                 <option value="" disabled>
                   Select your Country
                 </option>
-                {/*  Enter the code here for country dropdown            */}
+                {/*  Enter the code here for country dropdown */}
                 {Country &&
                   Country.getAllCountries().map((country) => (
                     <option value={country.isoCode} key={country.isoCode}>
@@ -155,7 +154,7 @@ const Shipping = () => {
             <div>
               <label>Pin Code</label>
               <input
-                type="text"
+                type="number"
                 name="pinCode"
                 placeholder="Enter Pincode"
                 onChange={handleUserInput}
@@ -178,38 +177,6 @@ const Shipping = () => {
             >
               Confirm Order
             </button>
-
-            {/* <Popup
-              trigger={
-                // <Link className="link" to="/myorders">
-                <button
-                  type="button"
-                  className="link"
-                  onClick={handleFormSubmission}
-                >
-                  Confirm Order
-                </button>
-                // Confirm Order
-                // </Link>
-              }
-              position="right center"
-            >
-              <div
-                style={{
-                  color: "red",
-                  position: "absolute",
-                  top: "50%",
-                  right: "100%",
-                  transform: "translateY(-50%)",
-                  backgroundColor: "#fff",
-                  padding: "10px",
-                  borderRadius: "5px",
-                  boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-                }}
-              >
-                Order Successfully Placed
-              </div>
-            </Popup> */}
           </form>
           {(showErrorMessage || showSuccessMessage) && (
             <div

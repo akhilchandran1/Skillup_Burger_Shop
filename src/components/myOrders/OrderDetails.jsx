@@ -22,9 +22,7 @@ const OrderDetails = () => {
   const getUserName = () => {
     const userInfo = localStorage.getItem("activeUserInfo");
     const loggedUserInfo = userInfo && JSON.parse(userInfo);
-    return userInfo
-      ? loggedUserInfo.name
-      : "No Name available (user not logged in)";
+    return userInfo ? loggedUserInfo.name : "Gust User";
   };
 
   return (
@@ -34,7 +32,7 @@ const OrderDetails = () => {
         <div>
           <h1>Shipping</h1>
           <p>
-            <b>Address</b>
+            <b>Address: </b>
             {order.shippingData.houseNo}, {order.shippingData.city},
             {order.shippingData.country}, {order.shippingData.state},
             {order.shippingData.pinCode}
@@ -43,52 +41,52 @@ const OrderDetails = () => {
         <div>
           <h1>Contact</h1>
           <p>
-            <b>Name</b>
+            <b>Name: </b>
             {getUserName()}
           </p>
           <p>
-            <b>Phone</b> {order.shippingData.phoneNo}
+            <b>Phone: </b> {order.shippingData.phoneNo}
           </p>
         </div>
         <div>
           <h1>Status</h1>
           <p>
-            <b>Order Status</b>
+            <b>Order Status: </b>
             {"Processing"}
           </p>
           <p>
-            <b>Placed At</b> {getDate(order.date)}
+            <b>Placed At: </b> {getDate(order.date)}
           </p>
           <p>
-            <b>Delivered At</b>
+            <b>Delivered At: </b>
             {getDate(order.date)}
           </p>
         </div>
         <div>
           <h1>Payment</h1>
           <p>
-            <b>Payment Method</b> {"COD"}
+            <b>Payment Method: </b> {"COD"}
           </p>
           <p>
-            <b>Payment Reference</b>#{"asdasdsadsad"}
+            <b>Payment Reference: </b>#{"asdasdsadsad"}
           </p>
           <p>
-            <b>Paid At</b> {getDate(order.date)}
+            <b>Paid At: </b> {getDate(order.date)}
           </p>
         </div>
         <div>
           <h1>Amount</h1>
           <p>
-            <b>Items Total / Subtotal</b>₹{order.subtotalAmount}
+            <b>Items Total / Subtotal: </b>₹{order.subtotalAmount}
           </p>
           <p>
-            <b>Shipping Charges</b>₹{order.shippingCharge}
+            <b>Shipping Charges: </b>₹{order.shippingCharge}
           </p>
           <p>
-            <b>Tax</b>₹{order.tax}
+            <b>Tax: </b>₹{order.tax}
           </p>
           <p>
-            <b>Total Amount</b>₹{order.totalAmount}
+            <b>Total Amount: </b>₹{order.totalAmount}
           </p>
         </div>
         <article>
