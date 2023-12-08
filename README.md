@@ -12,3 +12,9 @@
 ![alt text](https://github.com/akhilchandran1/Skillup_Burger_Shop/blob/main/src/assets/home_page.png)
 
 [▶️  Webpage Testing video](https://pages.github.com/](https://www.youtube.com/watch?v=l9usfYLS0zI)https://www.youtube.com/watch?v=l9usfYLS0zI)
+
+### Dummy user details:
+##### `email: meera@gmail.com`
+##### `password: meera123`
+##### `name: Meera Dev`
+##### `username: meera`
