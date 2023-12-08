@@ -35,6 +35,9 @@ const MenuCard = ({ itemNum, burgerSrc, price, title, handler, delay = 0 }) => {
           <div
             style={{
               color: "red",
+              position: "fixed",
+              top: "90%",
+              left: "30%",
               transform: "translate(0%,-500%)",
               backgroundColor: "#fff",
               padding: "10px",
