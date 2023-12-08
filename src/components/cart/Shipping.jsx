@@ -18,9 +18,10 @@ const Shipping = () => {
     pinCode: "",
     phoneNo: "",
   });
-  const [selectedCountry, setSelectedCountry] = useState("IN");
+  const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const navigate = useNavigate();
 
   const handleUserInput = (event) => {
@@ -43,7 +44,11 @@ const Shipping = () => {
   const handleFormSubmission = (event) => {
     event.preventDefault();
 
-    if (Object.values(shippingData).every((field) => field.length === 0)) {
+    const emptyValueCheck = Object.values(shippingData).every(
+      (field) => field !== ""
+    );
+
+    if (!emptyValueCheck) {
       setShowErrorMessage(true);
       return;
     }
@@ -76,142 +81,199 @@ const Shipping = () => {
     };
     dispatch(addOrder(newOrder));
     dispatch(emptyCart());
-    navigate("/myorders");
+    setShowSuccessMessage(true);
+    // navigate("/myorders");
   };
 
   return (
     <section className="shipping">
-      <main>
-        <h1>Shipping Details</h1>
-        <form>
-          <div>
-            <label>H.No.</label>
-            <input
-              type="text"
-              name="houseNo"
-              placeholder="Enter House No."
-              required
-              onChange={handleUserInput}
-            />
-          </div>
-          <div>
-            <label>City</label>
-            <input
-              type="text"
-              name="city"
-              placeholder="Enter City"
-              required
-              onChange={handleUserInput}
-            />
-          </div>
-          <div>
-            {/* Compelte the code for the COUNTRY DROPDOWN*/}
-            <label>Country</label>
+      {cartItems ? (
+        <main>
+          <h1>Shipping Details</h1>
+          {console.log(cartItems)}
+          <form>
+            <div>
+              <label>H.No.</label>
+              <input
+                type="text"
+                name="houseNo"
+                placeholder="Enter House No."
+                required
+                onChange={handleUserInput}
+              />
+            </div>
+            <div>
+              <label>City</label>
+              <input
+                type="text"
+                name="city"
+                placeholder="Enter City"
+                required
+                onChange={handleUserInput}
+              />
+            </div>
+            <div>
+              {/* Compelte the code for the COUNTRY DROPDOWN*/}
+              <label>Country</label>
 
-            <select
-              name="country"
-              value={selectedCountry}
-              onChange={handleCountrySelection}
+              <select
+                name="country"
+                value={selectedCountry}
+                onChange={handleCountrySelection}
+              >
+                <option value="" disabled>
+                  Select your Country
+                </option>
+                {/*  Enter the code here for country dropdown            */}
+                {Country &&
+                  Country.getAllCountries().map((country) => (
+                    <option value={country.isoCode} key={country.isoCode}>
+                      {country.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div>
+              {/* Add the code for the STATE DROPDOWN*/}
+              <label>State</label>
+              <select
+                name="state"
+                value={selectedState}
+                onChange={handleStateSelection}
+              >
+                <option value="" disabled>
+                  Select your State
+                </option>
+                {State &&
+                  State.getStatesOfCountry(selectedCountry).map((state) => (
+                    <option value={state.isoCode} key={state.isoCode}>
+                      {state.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div>
+              <label>Pin Code</label>
+              <input
+                type="text"
+                name="pinCode"
+                placeholder="Enter Pincode"
+                onChange={handleUserInput}
+              />
+            </div>
+            {/*  Enter thr code for contact */}
+            <div>
+              <label>Phone Number</label>
+              <input
+                type="number"
+                name="phoneNo"
+                placeholder="Enter Phone Number."
+                onChange={handleUserInput}
+              />
+            </div>
+            <button
+              type="button"
+              className="link"
+              onClick={handleFormSubmission}
             >
-              <option value="" disabled>
-                Select your Country
-              </option>
-              {/*  Enter the code here for country dropdown            */}
-              {Country &&
-                Country.getAllCountries().map((country) => (
-                  <option value={country.isoCode} key={country.isoCode}>
-                    {country.name}
-                  </option>
-                ))}
-            </select>
-          </div>
-          <div>
-            {/* Add the code for the STATE DROPDOWN*/}
-            <label>State</label>
-            <select
-              name="state"
-              value={selectedState}
-              onChange={handleStateSelection}
+              Confirm Order
+            </button>
+
+            {/* <Popup
+              trigger={
+                // <Link className="link" to="/myorders">
+                <button
+                  type="button"
+                  className="link"
+                  onClick={handleFormSubmission}
+                >
+                  Confirm Order
+                </button>
+                // Confirm Order
+                // </Link>
+              }
+              position="right center"
             >
-              <option value="">Select your State</option>
-              {State &&
-                State.getStatesOfCountry(selectedCountry).map((state) => (
-                  <option option value={state.isoCode} key={state.isoCode}>
-                    {state.name}
-                  </option>
-                ))}
-            </select>
-          </div>
-          <div>
-            <label>Pin Code</label>
-            <input
-              type="number"
-              name="pinCode"
-              placeholder="Enter Pincode"
-              onChange={handleUserInput}
-            />
-          </div>
-          {/*  Enter thr code for contact */}
-          <div>
-            <label>Phone Number</label>
-            <input
-              type="number"
-              name="phoneNo"
-              placeholder="Enter Phone Number."
-              onChange={handleUserInput}
-            />
-          </div>
-          {showErrorMessage && (
-            <p style={{ color: "red" }}>*** Please complete all fields ..!</p>
+              <div
+                style={{
+                  color: "red",
+                  position: "absolute",
+                  top: "50%",
+                  right: "100%",
+                  transform: "translateY(-50%)",
+                  backgroundColor: "#fff",
+                  padding: "10px",
+                  borderRadius: "5px",
+                  boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+                }}
+              >
+                Order Successfully Placed
+              </div>
+            </Popup> */}
+          </form>
+          {(showErrorMessage || showSuccessMessage) && (
+            <div
+              style={{
+                color: `${
+                  (showErrorMessage && "red") || (showSuccessMessage && "green")
+                }`,
+                position: "absolute",
+                top: "50%",
+                right: "37%",
+                transform: "translateY(-50%)",
+                backgroundColor: "#fff",
+                padding: "30px",
+                borderRadius: "5px",
+                boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+                border: "1px solid rgb(156, 0, 60)",
+              }}
+            >
+              <p>
+                {showErrorMessage && "*** Please complete all fields ..!"}
+                {showSuccessMessage && "Order Successfully Placed"}
+              </p>
+              <button
+                type="button"
+                className="link"
+                onClick={() => {
+                  showErrorMessage && setShowErrorMessage(false);
+                  showSuccessMessage && setShowSuccessMessage(false);
+                  showSuccessMessage && navigate("/myorders");
+                }}
+              >
+                ok
+              </button>
+            </div>
           )}
-          <button type="button" className="link" onClick={handleFormSubmission}>
-            Confirm Order
-          </button>
-          {
-            <div
-              style={{
-                color: "red",
-                position: "absolute",
-                top: "50%",
-                right: "100%",
-                transform: "translateY(-50%)",
-                backgroundColor: "#fff",
-                padding: "10px",
-                borderRadius: "5px",
-                boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-              }}
-            >
-              Order Successfully Placed
-            </div>
-          }
-
-          {/* <Popup
-            trigger={
-              <Link className="link" to="/myorders">
-                <button type="button">Confirm Order</button>
-                Confirm Order
-              </Link>
-            }
-            position="right center"
+        </main>
+      ) : (
+        <main>
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              right: "37%",
+              transform: "translateY(-50%)",
+              backgroundColor: "#fff",
+              padding: "30px",
+              borderRadius: "5px",
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+              border: "1px solid rgb(156, 0, 60)",
+            }}
           >
-            <div
-              style={{
-                color: "red",
-                position: "absolute",
-                top: "50%",
-                right: "100%",
-                transform: "translateY(-50%)",
-                backgroundColor: "#fff",
-                padding: "10px",
-                borderRadius: "5px",
-                boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+            <p>No items in the cart. </p>
+            <button
+              type="button"
+              className="link"
+              onClick={() => {
+                navigate("/");
               }}
             >
-              Order Successfully Placed
-            </div>
-          </Popup> */}
-        </form>
-      </main>
+              Home Page
+            </button>
+          </div>
+        </main>
+      )}
     </section>
   );
 };

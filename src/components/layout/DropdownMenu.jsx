@@ -37,13 +37,19 @@ function DropdownMenu() {
               {navLinks.map((d, i) => (
                 <li key={i}>
                   <Link to={d.path}>
-                    <button
-                      className="dropdown-item"
-                      type="button"
-                      onClick={handleLogout}
-                    >
-                      {d.name}
-                    </button>
+                    {d.name === "Logout" ? (
+                      <button
+                        className="dropdown-item"
+                        type="button"
+                        onClick={handleLogout}
+                      >
+                        {d.name}
+                      </button>
+                    ) : (
+                      <button className="dropdown-item" type="button">
+                        {d.name}
+                      </button>
+                    )}
                   </Link>
                 </li>
               ))}

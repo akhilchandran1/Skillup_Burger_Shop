@@ -9,36 +9,45 @@ const MyOrders = () => {
   return (
     <section className="tableClass">
       <main>
-        <table>
-          <thead>
-            <tr>
-              <th>Order Id</th>
-              <th>Status</th>
-              <th>Item Qty</th>
-              <th>Amount</th>
-              <th>Payment Method</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {/*     Add the code for the table body */}
-            {orders.map((order, index) => (
-              <tr key={index}>
-                <td>{order.id}</td>
-                <td>Processing</td>
-                <td>{order.totalQuantity}</td>
-                <td>₹{order.totalAmount}</td>
-                <td>COD</td>
-                <td>
-                  <Link to={`/order/${order.id}`}>
-                    <AiOutlineEye />
-                  </Link>
-                </td>
+        {Object.keys(orders).length > 0 ? (
+          <table>
+            <thead>
+              <tr>
+                <th>Order Id</th>
+                <th>Status</th>
+                <th>Item Qty</th>
+                <th>Amount</th>
+                <th>Payment Method</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {/*     Add the code for the table body */}
+              {orders.map((order, index) => (
+                <tr key={index}>
+                  <td>{order.id}</td>
+                  <td>Processing</td>
+                  <td>{order.totalQuantity}</td>
+                  <td>₹{order.totalAmount}</td>
+                  <td>COD</td>
+                  <td>
+                    <Link to={`/order/${order.id}`}>
+                      <AiOutlineEye />
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className="empty-cart-card">
+            <p>No orders</p>
+            <Link type="button" className="link" to="/">
+              Home Page
+            </Link>
+          </div>
+        )}
       </main>
     </section>
   );

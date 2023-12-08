@@ -3,8 +3,13 @@ import { motion } from "framer-motion";
 import { founterInfo } from "../home/Founder";
 import { Link } from "react-router-dom";
 // import { MdDashboard } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import profileIcon from "../../assets/profile-icon.png";
 
 const Profile = () => {
+  const navigate = useNavigate();
+
+  const activeUser = JSON.parse(localStorage.getItem("activeUserInfo"));
   const options = {
     initial: {
       y: "-100%",
@@ -18,9 +23,13 @@ const Profile = () => {
   return (
     <section className="profile">
       <main>
-        <motion.img src={founterInfo.image} alt="User" {...options} />
+        <motion.img
+          src={activeUser ? profileIcon : founterInfo.image}
+          alt="User"
+          {...options}
+        />
         <motion.h5 {...options} transition={{ delay: 0.3 }}>
-          {founterInfo.name}
+          {activeUser ? activeUser.name : founterInfo.name}
         </motion.h5>
 
         <motion.div
@@ -47,6 +56,10 @@ const Profile = () => {
           }}
           transition={{
             delay: 0.3,
+          }}
+          onClick={() => {
+            localStorage.removeItem("activeUserInfo");
+            navigate("/login");
           }}
         >
           Logout

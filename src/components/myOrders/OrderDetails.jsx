@@ -12,8 +12,20 @@ const OrderDetails = () => {
   };
 
   const order = orders.find((order) => order.id === id);
-  if (!order) return <p>No Orders Places yet</p>;
-  console.log(order);
+  if (!order)
+    return (
+      <section className="orderDetails" style={{ height: "100vh" }}>
+        <p className="empty-cart-card">No Orders Places yet</p>
+      </section>
+    );
+
+  const getUserName = () => {
+    const userInfo = localStorage.getItem("activeUserInfo");
+    const loggedUserInfo = userInfo && JSON.parse(userInfo);
+    return userInfo
+      ? loggedUserInfo.name
+      : "No Name available (user not logged in)";
+  };
 
   return (
     <section className="orderDetails">
@@ -23,14 +35,16 @@ const OrderDetails = () => {
           <h1>Shipping</h1>
           <p>
             <b>Address</b>
-            {order.shippingData.houseNo}
+            {order.shippingData.houseNo}, {order.shippingData.city},
+            {order.shippingData.country}, {order.shippingData.state},
+            {order.shippingData.pinCode}
           </p>
         </div>
         <div>
           <h1>Contact</h1>
           <p>
             <b>Name</b>
-            {"Stuart"}
+            {getUserName()}
           </p>
           <p>
             <b>Phone</b> {order.shippingData.phoneNo}

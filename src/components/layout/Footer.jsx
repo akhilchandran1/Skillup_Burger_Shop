@@ -1,6 +1,6 @@
 // Write all the code here
 import React from "react";
-import { AiFillInstagram, AiFillYoutube } from "react-icons/ai";
+import { AiFillInstagram, AiFillYoutube, AiFillGithub } from "react-icons/ai";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -23,6 +23,9 @@ const Footer = () => {
         </a>
         <a href="https://instagram.com/">
           <AiFillInstagram />
+        </a>
+        <a href="https://github.com/">
+          <AiFillGithub />
         </a>
       </aside>
     </footer>

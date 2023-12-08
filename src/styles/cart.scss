@@ -38,7 +38,8 @@
   position: sticky;
   left: 40%;
   top: 30%;
-  height: 100px;
+  height: auto;
+  padding: 1rem;
   width: 400px;
   background: #f2f2f2;
   overflow: scroll;
@@ -105,5 +106,9 @@
     float: none;
     display: block;
     width: 100%;
+  }
+  .empty-cart-card {
+    width: 200px;
+    left: 22%;
   }
 }

@@ -57,7 +57,12 @@ function Login() {
     });
 
     if (validUser) {
-      localStorage.setItem("activeUserInfo", JSON.stringify(validUser));
+      const user = {
+        name: validUser.name,
+        email: validUser.email,
+        username: validUser.username,
+      };
+      localStorage.setItem("activeUserInfo", JSON.stringify(user));
       navigate("/");
     } else {
       alert("Invalid email or password! Please check your entries.");

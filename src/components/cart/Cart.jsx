@@ -50,7 +50,7 @@ const Cart = () => {
               key={item.id}
               id={item.id}
               title={item.title}
-              value={item.value}
+              value={item.value || 0}
               img={item.img}
               increment={increment}
               decrement={decrement}
@@ -79,6 +79,9 @@ const Cart = () => {
       ) : (
         <div className="empty-cart-card">
           <p>Your Cart is empty.</p>
+          <Link type="button" className="link" to="/">
+            Home Page
+          </Link>
         </div>
       )}
     </section>
